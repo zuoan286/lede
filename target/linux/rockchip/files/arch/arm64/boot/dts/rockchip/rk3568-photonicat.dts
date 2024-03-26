@@ -44,8 +44,8 @@
 
 	modem-rfkill {
 		compatible = "rfkill-gpio";
-		name = "modem-rfkill";
-		type = "wwan";
+		label = "modem-rfkill";
+		radio-type = "wwan";
 		reset-gpios = <&gpio0 RK_PB0 GPIO_ACTIVE_LOW>;
 		shutdown-gpios = <&gpio4 RK_PC4 GPIO_ACTIVE_HIGH>;
 	};
@@ -459,6 +459,7 @@
 	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd>;
 	vmmc-supply = <&vcc_3v3>;
 	vqmmc-supply = <&vcc_1v8>;
+	status = "okay";
 };
 
 &sdmmc0 {

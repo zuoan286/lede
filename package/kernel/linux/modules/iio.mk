@@ -383,7 +383,7 @@ $(eval $(call KernelPackage,iio-st_accel-spi))
 
 
 define KernelPackage/iio-lsm6dsx
-  DEPENDS:=+kmod-iio-kfifo-buf +kmod-regmap-core
+  DEPENDS:=+kmod-iio-kfifo-buf +kmod-regmap-core +LINUX_6_6:kmod-industrialio-triggered-buffer
   TITLE:=ST LSM6DSx driver for IMU MEMS sensors
   KCONFIG:=CONFIG_IIO_ST_LSM6DSX
   FILES:=$(LINUX_DIR)/drivers/iio/imu/st_lsm6dsx/st_lsm6dsx.ko
@@ -566,3 +566,17 @@ define KernelPackage/iio-fxos8700-spi/description
 endef
 
 $(eval $(call KernelPackage,iio-fxos8700-spi))
+
+define KernelPackage/iio-ti-am335x-adc
+  TITLE:= TI Sitara AM335x ADC driver
+  DEPENDS:=@TARGET_omap
+  KCONFIG:=CONFIG_TI_AM335X_ADC
+  FILES:=$(LINUX_DIR)/drivers/iio/adc/ti_am335x_adc.ko
+  AUTOLOAD:=$(call AutoProbe,ti_am335x_adc)
+  $(call AddDepends/iio,+kmod-iio-kfifo-buf)
+endef
+define KernelPackage/iio-ti-am335x-adc/description
+ Driver for the TI AM335x ADC.
+endef
+
+$(eval $(call KernelPackage,iio-ti-am335x-adc))
